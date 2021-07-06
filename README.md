@@ -31,3 +31,4 @@ options (
     fromat = 'CSV',
     uris = ['gs://stockx_weather_bucket/weather.csv']
 )
+
