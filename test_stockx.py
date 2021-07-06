@@ -19,7 +19,7 @@ x1 = requests.get(url1).text
 y = json.loads(x)
 y1 = json.loads(x1)
 
- #converted the json data to pandas dataframe.
+#converted the json data to pandas dataframe.
 df = pd.json_normalize(y['data'],record_path=(['weather']))
 df0= pd.json_normalize(y['data'],record_path=(['weather']))
 
@@ -27,14 +27,16 @@ df['city'] = 'Los Angeles, United States of America'
 df0['city'] = 'Detroit, United States of America'
 df1 = pd.concat([df,df0])
 df2 = df1.drop(['astronomy','hourly'],axis = 1)
- # writing data to a parquet file format
+# writing data to a parquet file format
 df2.to_parquet('weather.parquet.gzip',compression='gzip',index = False)
-path = os.path.abspath(os.getcwd()) #absolute path to the file
-#json_path = path+'service-account-file.json'
 
+#absolute path to the file
+path = os.path.abspath(os.getcwd())
+
+#verifying the credentials of GCS 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]= path+'/service-account-file.json'
 
-
+#function to upload the data to GCS Bucket
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
   """Uploads a file to the bucket."""
   storage_client = storage.Client()
