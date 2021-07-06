@@ -1,8 +1,9 @@
 #importing necessary libraries
 import requests
 import json
-import pandas as pd
 import os
+!pip install --user pandas==1.0.3
+import pandas as pd
 from google.cloud import storage
 
 #api to get the weather data fot the cities Los Anegeles and Detroit.
