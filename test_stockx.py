@@ -2,9 +2,11 @@
 import requests
 import json
 import os
-!pip install --user pandas==1.0.3
+import subprocess
+import sys
+subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas==1.0.3"])
 import pandas as pd
-!pip install google.cloud.storage
+subprocess.check_call([sys.executable, "-m", "pip", "install", "google.cloud.storage"])
 from google.cloud import storage
 
 #api to get the weather data fot the cities Los Anegeles and Detroit.
