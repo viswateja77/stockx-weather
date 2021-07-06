@@ -27,8 +27,8 @@ df['city'] = 'Los Angeles, United States of America'
 df0['city'] = 'Detroit, United States of America'
 df1 = pd.concat([df,df0])
 df2 = df1.drop(['astronomy','hourly'],axis = 1)
-
-df2.to_csv('weather.csv',index = False)
+ # writing data to a parquet file format
+df2.to_parquet('weather.parquet.gzip',compression='gzip',index = False)
 path = os.path.abspath(os.getcwd()) #absolute path to the file
 #json_path = path+'service-account-file.json'
 
@@ -47,4 +47,4 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
       source_file_name,
       destination_blob_name))
 
-upload_blob('stockx_weather_bucket','weather.csv','weather')
+upload_blob('stockx_weather_bucket','weather.parquet.gzip','weather')
